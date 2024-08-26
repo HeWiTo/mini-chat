@@ -7,11 +7,11 @@ import (
 
 var Ctx = context.Background()
 
-func NewRedisClient() *redis.Client {
+func NewRedisClientWithHost(host string) *redis.Client {
     rdb := redis.NewClient(&redis.Options{
-        Addr:     "localhost:6379",
-        Password: "",              
-        DB:       0,               
+        Addr:     host + ":6379",
+        Password: "",
+        DB:       0,
     })
 
     return rdb

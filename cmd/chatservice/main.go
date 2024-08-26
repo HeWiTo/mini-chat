@@ -1,18 +1,22 @@
 package main
 
 import (
-    "chat-system/internal/repository"
-    "chat-system/internal/service"
-    "chat-system/pkg/utils"
-    "chat-system/transport"
+    "mini-chat/internal/repository"
+    "mini-chat/internal/service"
+    "mini-chat/pkg/utils"
+    "mini-chat/transport"
     "github.com/gocql/gocql"
     "log"
     "net/http"
+    "os"
 )
 
 func main() {
+    cassandraHost := os.Getenv("CASSANDRA_HOST")
+    redisHost := os.Getenv("REDIS_HOST")
+
     // Cassandra session setup
-    cluster := gocql.NewCluster("127.0.0.1")
+    cluster := gocql.NewCluster(cassandraHost)
     cluster.Keyspace = "chat"
     session, err := cluster.CreateSession()
     if err != nil {
@@ -21,7 +25,7 @@ func main() {
     defer session.Close()
 
     // Redis client setup
-    redisClient := utils.NewRedisClient()
+    redisClient := utils.NewRedisClientWithHost(redisHost)
 
     // Repository and service initialization
     userRepo := repository.NewCassandraUserRepository(session)
