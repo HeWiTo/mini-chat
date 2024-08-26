@@ -1,8 +1,8 @@
-# Chat Service
+# Mini Chat
 
 ## Build and Run the Containers
 
-Now that everything is set up, let's build and run the containers using Docker Compose:
+Open a terminal and type this command below:
 
 ```bash
 docker-compose up --build
