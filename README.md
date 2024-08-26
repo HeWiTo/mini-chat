@@ -14,6 +14,18 @@ This command will:
 - Pull the latest cassandra and redis images.
 - Start all services together in a single network.
 
+## Cassandra table messages
+
+```bash
+CREATE TABLE IF NOT EXISTS messages (
+    id UUID PRIMARY KEY,
+    sender_id UUID,
+    recipient_id UUID,
+    content TEXT,
+    timestamp TIMESTAMP
+);
+```
+
 ## Testing the Application
 
 Once all containers are up and running:
